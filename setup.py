@@ -4,6 +4,6 @@ setup(
     name='venv-run',
     version='0.0.0',
     package_dir={'': 'src'},
-    packages=find_packages('src'),
+    py_modules=['venvrun'],
     python_requires='~=3.5',
 )
