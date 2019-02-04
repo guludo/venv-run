@@ -49,9 +49,14 @@ def run():
 
         args.venv = venvs[0]
 
-    python_executable = os.path.join(args.venv, 'bin', 'python')
-    python_args.insert(0, python_executable)
-    os.execv(python_executable, python_args)
+    path = os.path.join(args.venv, 'bin')
+    if 'PATH' in os.environ:
+        os.environ['PATH'] = path + os.pathsep + os.environ['PATH']
+    else:
+        os.environ['PATH'] = path
+
+    python_args.insert(0, 'python')
+    os.execvp('python', python_args)
 
 
 if __name__ == '__main__':
