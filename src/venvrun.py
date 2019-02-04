@@ -5,17 +5,18 @@ import sys
 
 def run():
     parser = ArgumentParser(
-        usage='%(prog)s [OPTIONS] [--] [PYTHON_OPTIONS]',
+        usage='%(prog)s [OPTIONS] [--] [CMD]',
         description='''
-            Run python from an existing virtual environment. By default the
-            location of the virtual environment directory is searched based
+            Run command from an existing python virtual environment (that is,
+            with the environment's bin directory prepended to PATH). By default
+            the location of the virtual environment directory is searched based
             from your current working directory and used if only one match is
             found. This behavior can be overridden with the --venv option.
 
-            The options passed in PYTHON_OPTIONS are forwarded to the
-            environment's python interpreter. You can prepend PYTHON_OPTIONS
-            with -- to avoid conflict with
-            %(prog)s own options.
+            CMD contains the command line to execute. You can prepend
+            CMD with -- to avoid conflict with %(prog)s own options. If CMD is
+            omitted then the environment's python interpreter is run without
+            arguments.
         ''',
     )
 
@@ -25,10 +26,13 @@ def run():
         ''',
     )
 
-    args, python_args = parser.parse_known_args()
+    args, cmd_args = parser.parse_known_args()
 
-    if python_args and python_args[0] == '--':
-        python_args.pop(0)
+    if not cmd_args:
+        cmd_args = ['python']
+
+    if cmd_args and cmd_args[0] == '--':
+        cmd_args.pop(0)
 
     if not args.venv:
         venvs = []
@@ -55,8 +59,7 @@ def run():
     else:
         os.environ['PATH'] = path
 
-    python_args.insert(0, 'python')
-    os.execvp('python', python_args)
+    os.execvp(cmd_args[0], cmd_args)
 
 
 if __name__ == '__main__':
