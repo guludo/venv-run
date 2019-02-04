@@ -17,12 +17,28 @@ def run():
             CMD with -- to avoid conflict with %(prog)s own options. If CMD is
             omitted then the environment's python interpreter is run without
             arguments.
+
+            This tool tries to guess if you want to run the python interpreter
+            so that you do not need to start CMD with 'python'. For that it
+            first tries to run CMD. If that fails because the executable for
+            CMD can not be found and the first word of CMD begins with '-' or
+            ends with '.py', then 'python' is prepended to CMD and the
+            execution is retried. If you do not desire such a behavior, pass
+            the --no-guess option.
         ''',
     )
 
     parser.add_argument('--venv',
         help='''
             Use this virtual environment instead of searching for one.
+        ''',
+    )
+
+    parser.add_argument('--no-guess',
+        action='store_true',
+        help='''
+            Do not try to prepend 'python' when execution fails because the
+            command is not found.
         ''',
     )
 
@@ -59,7 +75,17 @@ def run():
     else:
         os.environ['PATH'] = path
 
-    os.execvp(cmd_args[0], cmd_args)
+    try:
+        os.execvp(cmd_args[0], cmd_args)
+    except FileNotFoundError:
+        if args.no_guess:
+            raise
+
+        if cmd_args[0].startswith('-') or cmd_args[0].endswith('.py'):
+            cmd_args.insert(0, 'python')
+            os.execvp(cmd_args[0], cmd_args)
+        else:
+            raise
 
 
 if __name__ == '__main__':
