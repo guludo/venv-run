@@ -30,6 +30,13 @@ your current working directory so you can save some typing.
 Installation
 ============
 
+Using ``pip``
+-------------
+
+.. code:: bash
+
+    pip install venv-run
+
 From source
 -----------
 
