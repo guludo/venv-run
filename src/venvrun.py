@@ -9,9 +9,9 @@ def run():
         description='''
             Run command from an existing python virtual environment (that is,
             with the environment's bin directory prepended to PATH). By default
-            the location of the virtual environment directory is searched based
-            from your current working directory and used if only one match is
-            found. This behavior can be overridden with the --venv option.
+            the location of the virtual environment directory is searched from
+            your current working directory and used if only one match is found.
+            This behavior can be overridden with the --venv option.
 
             CMD contains the command line to execute. You can prepend
             CMD with -- to avoid conflict with %(prog)s own options. If CMD is
