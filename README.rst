@@ -16,9 +16,9 @@ Doing this...
     python myapp.py
     deactivate
 
-.. contents::
-
 That is the main motivation of this tool!
+
+.. contents::
 
 ``venv-run`` is a tool for running commands with a Python virtual environment
 without *explicitly* activating it (and deactivating it when you are done).
