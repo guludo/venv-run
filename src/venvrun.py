@@ -1,6 +1,7 @@
 from argparse import ArgumentParser, REMAINDER
 from glob import glob
 import os.path
+import platform
 import sys
 
 def run():
@@ -49,12 +50,17 @@ def run():
 
     if cmd_args and cmd_args[0] == '--':
         cmd_args.pop(0)
-
     if not args.venv:
         venvs = []
-        for p in glob(os.path.join('*', 'bin', 'python')):
-            if os.access(p, os.X_OK):
-                venvs.append(os.path.dirname(os.path.dirname(p)))
+
+        if platform.system() != 'Windows':
+            for p in glob(os.path.join('*', 'bin', 'python')):
+                if os.access(p, os.X_OK):
+                    venvs.append(os.path.dirname(os.path.dirname(p)))
+        else:
+            for p in glob(os.path.join('*', 'Scripts', 'python.exe')):
+                if os.access(p, os.X_OK):
+                    venvs.append(os.path.dirname(os.path.dirname(p)))
 
         if not venvs:
             print('No virtual environments found', file=sys.stderr)
@@ -68,8 +74,12 @@ def run():
             exit(1)
 
         args.venv = venvs[0]
+    path = ''
+    if platform.system() != 'Windows':
+        path = os.path.join(args.venv, 'bin')
+    else:
+        path = os.path.join(args.venv, 'Scripts')
 
-    path = os.path.join(args.venv, 'bin')
     if 'PATH' in os.environ:
         os.environ['PATH'] = path + os.pathsep + os.environ['PATH']
     else:
