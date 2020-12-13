@@ -20,5 +20,5 @@ class VenvRunTest(unittest.TestCase):
         with patch("venvrun.platform.system", return_value='Linux'):
             venvs = venvrun.guess()
             self.assertListEqual(sorted(venvs), sorted([
-                'venv', os.curdir
+                'venv', '.venv', os.curdir
             ]))
