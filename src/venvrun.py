@@ -6,16 +6,19 @@ import sys
 
 
 def guess():
-    venvs = []
-
     if platform.system() != 'Windows':
-        for p in glob(os.path.join('*', 'bin', 'python')):
-            if os.access(p, os.X_OK):
-                venvs.append(os.path.dirname(os.path.dirname(p)))
+        pypath = ('bin', 'python')
     else:
-        for p in glob(os.path.join('*', 'Scripts', 'python.exe')):
-            if os.access(p, os.X_OK):
-                venvs.append(os.path.dirname(os.path.dirname(p)))
+        pypath = ('Scripts', 'python.exe')
+
+    exes = []
+
+    exes.extend(glob(os.path.join('*', *pypath)))
+
+    venvs = [
+        os.path.dirname(os.path.dirname(exe)) for exe in exes
+        if os.access(exe, os.X_OK)
+    ]
 
     return venvs
 
