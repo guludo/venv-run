@@ -2,6 +2,7 @@ from argparse import ArgumentParser, REMAINDER
 from glob import glob
 import os.path
 import platform
+import subprocess
 import sys
 
 
@@ -16,6 +17,14 @@ def guess():
     exes.extend(glob(os.path.join('*', *pypath)))
     exes.extend(glob(os.path.join('.*', *pypath)))
     exes.append(os.path.join(os.path.curdir, *pypath))
+    try:
+        with open('.python-version', 'r') as f:
+            proc = subprocess.run(
+                ('pyenv', 'prefix', f.readline().strip()),
+                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+            exes.append(os.path.join(proc.stdout.decode().strip(), *pypath))
+    except FileNotFoundError:
+        pass
 
     venvs = [
         os.path.dirname(os.path.dirname(exe)) for exe in exes
