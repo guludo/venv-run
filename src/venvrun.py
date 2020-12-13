@@ -14,6 +14,7 @@ def guess():
     exes = []
 
     exes.extend(glob(os.path.join('*', *pypath)))
+    exes.append(os.path.join(os.path.curdir, *pypath))
 
     venvs = [
         os.path.dirname(os.path.dirname(exe)) for exe in exes

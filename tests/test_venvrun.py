@@ -19,4 +19,6 @@ class VenvRunTest(unittest.TestCase):
     def testGuess(self):
         with patch("venvrun.platform.system", return_value='Linux'):
             venvs = venvrun.guess()
-            self.assertListEqual(sorted(venvs), sorted(['venv']))
+            self.assertListEqual(sorted(venvs), sorted([
+                'venv', os.curdir
+            ]))
