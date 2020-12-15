@@ -25,8 +25,8 @@ class VenvRunTest(unittest.TestCase):
                     ('echo', 'pyenv/path/somewhere'), **kwargs)
             return real_subprocess_run(*args, **kwargs)
 
-        with patch("venvrun.platform.system", return_value='Linux'), \
-             patch("venvrun.subprocess.run", mock_run):
+        with patch.object(venvrun.platform, "system", return_value='Linux'), \
+             patch.object(venvrun.subprocess, "run", mock_run):
             venvs = venvrun.guess()
             self.assertListEqual(sorted(venvs), sorted([
                 'venv', '.venv', os.curdir, 'pyenv/path/somewhere'
