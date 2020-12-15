@@ -27,16 +27,6 @@ prepended to the system's ``PATH`` environment variable. Another nice thing
 about ``venv-run`` is that it tries to find the environment's directory from
 your current working directory so you can save some typing.
 
-A common specific use case is to be able to run pre-commit_ ``system``
-and ``script`` hooks written in Python so that they're run within the
-virtual environment of the project, even if it hadn't been activated
-beforehand. This may happen for example when ``pre-commit`` is
-launched when committing from an IDE that is not virtualenv
-self-aware, initially launched in an environment different from the
-project's virtual one.
-
-.. _pre-commit: https://pre-commit.com
-
 Installation
 ============
 
@@ -199,6 +189,24 @@ can prepend ``CMD`` with ``--`` to mark the beginning of ``CMD``. Example:
 
     $ venv-run python -h # Shows venv-run's help message
     $ venv-run -- python -h # Shows python's help message
+
+
+Use cases
+=========
+
+With pre-commit
+---------------
+
+A common specific use case is to be able to run pre-commit_ ``system``
+and ``script`` hooks written in Python so that they're run within the
+virtual environment of the project, even if it hadn't been activated
+beforehand. This may happen for example when ``pre-commit`` is
+launched when committing from an IDE that is not virtualenv
+self-aware, initially launched in an environment different from the
+project's virtual one.
+
+.. _pre-commit: https://pre-commit.com
+
 
 Author
 ======
