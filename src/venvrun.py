@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, REMAINDER
+from collections import OrderedDict
 from glob import glob
 import os.path
 import platform
@@ -29,12 +30,12 @@ def guess():
     except FileNotFoundError:
         pass
 
-    venvs = [
-        os.path.dirname(os.path.dirname(exe)) for exe in exes
+    venvs = OrderedDict(
+        (os.path.dirname(os.path.dirname(exe)), True) for exe in exes
         if os.access(exe, os.X_OK)
-    ]
+    )
 
-    return venvs
+    return venvs.keys()
 
 
 def run():
