@@ -205,7 +205,33 @@ launched when committing from an IDE that is not virtualenv
 self-aware, initially launched in an environment different from the
 project's virtual one.
 
+Another one is to get tools that need to be run in the project's
+virtual environment to work properly -- such as mypy_, pylint_, and
+pytype_ to name a few -- to actually run in it. To do this, instead of
+using the usual project provided hooks, install the respective tool
+package along with its dependencies and plugins in the project's
+virtual environment and use a ``local`` pre-commit hook like:
+
+.. code:: yaml
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        language: python
+        additional_dependencies: [venv-run]
+        entry: venv-run pylint
+        types: [python]
+
+Be sure to look into the project provided hooks to see if there are
+any additional needed settings, for example ``args``, anything special
+in ``entry``, ``require_serial`` or the like, and replicate in your
+local hook as applicable.
+
 .. _pre-commit: https://pre-commit.com
+.. _mypy: http://mypy-lang.org
+.. _pylint: https://pylint.org
+.. _pytype: https://google.github.io/pytype/
 
 
 Author
