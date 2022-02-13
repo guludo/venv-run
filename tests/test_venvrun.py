@@ -28,9 +28,14 @@ class VenvRunTest(unittest.TestCase):
         with patch.object(venvrun.platform, "system", return_value='Linux'), \
              patch.object(venvrun.subprocess, "run", mock_run):
             venvs = venvrun.guess()
-            self.assertListEqual(sorted(venvs), sorted([
-                'venv', '.venv', os.curdir, 'pyenv/path/somewhere'
-            ]))
+            self.assertListEqual(
+                sorted(venvs),
+                sorted(
+                    os.path.normpath(os.path.join(os.getcwd(), x))
+                    for x in (
+                            'venv', '.venv', os.curdir, 'pyenv/path/somewhere'
+                    ))
+            )
 
     def testGuessDedupe(self):
 
@@ -43,6 +48,11 @@ class VenvRunTest(unittest.TestCase):
         with patch.object(venvrun.platform, "system", return_value='Linux'), \
              patch.object(venvrun.subprocess, "run", mock_run):
             venvs = venvrun.guess()
-            self.assertListEqual(sorted(venvs), sorted([
-                'venv', '.venv', os.curdir,
-            ]))
+            self.assertListEqual(
+                sorted(venvs),
+                sorted(
+                    os.path.normpath(os.path.join(os.getcwd(), x))
+                    for x in (
+                            'venv', '.venv', os.curdir
+                    ))
+            )

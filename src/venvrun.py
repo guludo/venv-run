@@ -31,7 +31,10 @@ def guess():
         pass
 
     venvs = OrderedDict(
-        (os.path.dirname(os.path.dirname(exe)), True) for exe in exes
+        # Absolutize, normalize, and canonicalize for deduplication
+        (os.path.realpath(os.path.abspath(
+            os.path.dirname(os.path.dirname(exe)))), True)
+        for exe in exes
         if os.access(exe, os.X_OK)
     )
 
