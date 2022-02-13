@@ -31,3 +31,18 @@ class VenvRunTest(unittest.TestCase):
             self.assertListEqual(sorted(venvs), sorted([
                 'venv', '.venv', os.curdir, 'pyenv/path/somewhere'
             ]))
+
+    def testGuessDedupe(self):
+
+        def mock_run(*args, **kwargs):
+            if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
+                return real_subprocess_run(
+                    ('echo', 'venv'), **kwargs)
+            return real_subprocess_run(*args, **kwargs)
+
+        with patch.object(venvrun.platform, "system", return_value='Linux'), \
+             patch.object(venvrun.subprocess, "run", mock_run):
+            venvs = venvrun.guess()
+            self.assertListEqual(sorted(venvs), sorted([
+                'venv', '.venv', os.curdir,
+            ]))
