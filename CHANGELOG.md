@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+### Fixed
+- Ignore commented out .python-version entries (@scop)
 
 ## 0.1.0 - 2020-12-16
 ### Added
