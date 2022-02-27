@@ -3,6 +3,7 @@
 ## Unreleased
 ### Fixed
 - Ignore commented out .python-version entries (@scop)
+- Canonicalize, absolutize, and deduplicate list of found env dirs (@scop)
 
 ## 0.1.0 - 2020-12-16
 ### Added
