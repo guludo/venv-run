@@ -5,7 +5,7 @@ with open("README.rst", "r") as f:
 
 setup(
     name='venv-run',
-    version='0.1.0',
+    version='0.1.1',
     author='Gustavo José de Sousa',
     author_email='gustavo.jo.sousa@gmail.com',
     description='Run commands using Python virtual environment',

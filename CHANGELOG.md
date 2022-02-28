@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+- Nothing yet.
+
+## 0.1.1 - 2022-02-28
 ### Fixed
 - Ignore commented out .python-version entries (@scop)
 - Canonicalize, absolutize, and deduplicate list of found env dirs (@scop)
