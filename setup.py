@@ -12,6 +12,9 @@ setup(
     long_description=long_description,
     long_description_content_type='text/x-rst',
     url='https://github.com/guludo/venv-run',
+    project_urls={
+        'Changelog': 'https://github.com/guludo/venv-run/blob/master/CHANGELOG.md',
+    },
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
