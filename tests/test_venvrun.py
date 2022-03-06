@@ -29,6 +29,7 @@ class VenvRunTest(unittest.TestCase):
         with patch.object(venvrun.platform, "system", return_value='Linux'), \
              patch.object(venvrun.subprocess, "run", mock_run):
             venvs = venvrun.guess()
+            self.assertTrue(venvs[0], "subscriptability")
             self.assertListEqual(
                 sorted(venvs),
                 sorted(
@@ -49,6 +50,7 @@ class VenvRunTest(unittest.TestCase):
         with patch.object(venvrun.platform, "system", return_value='Linux'), \
              patch.object(venvrun.subprocess, "run", mock_run):
             venvs = venvrun.guess()
+            self.assertTrue(venvs[0], "subscriptability")
             self.assertListEqual(
                 sorted(venvs),
                 sorted(
@@ -72,6 +74,7 @@ class VenvRunTest(unittest.TestCase):
             with patch.object(venvrun.platform, "system", return_value='Linux'), \
                  patch.object(venvrun.subprocess, "run", mock_run):
                 venvs = venvrun.guess()
+                self.assertTrue(venvs[0], "subscriptability")
                 self.assertListEqual(
                     sorted(venvs),
                     sorted(

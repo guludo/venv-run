@@ -38,7 +38,7 @@ def guess():
         if os.access(exe, os.X_OK)
     )
 
-    return venvs.keys()
+    return list(venvs.keys())
 
 
 def run():
