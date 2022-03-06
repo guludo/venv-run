@@ -1,6 +1,10 @@
 # Changelog
 
 ## Unreleased
+- Nothing yet.
+
+## 0.1.2 - 2022-03-06
+### Fixed
 - Fix subscripted access to guessed venvs return value (@scop)
 
 ## 0.1.1 - 2022-02-28
