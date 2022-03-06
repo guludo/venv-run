@@ -2,7 +2,7 @@ import os
 import sys
 import tempfile
 import unittest
-from subprocess import run as real_subprocess_run
+from subprocess import CompletedProcess, run as real_subprocess_run
 from unittest.mock import patch
 
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, 'src'))
@@ -11,16 +11,16 @@ import venvrun
 
 class VenvRunTest(unittest.TestCase):
 
-    def setUp(self):
+    def setUp(self) -> None:
         self.oldcwd = os.getcwd()
         os.chdir(os.path.join(os.path.dirname(__file__), 'fixture'))
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         os.chdir(self.oldcwd)
 
-    def testGuess(self):
+    def testGuess(self) -> None:
 
-        def mock_run(*args, **kwargs):
+        def mock_run(*args, **kwargs) -> CompletedProcess[str]:
             if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                 return real_subprocess_run(
                     ('echo', 'pyenv/path/somewhere'), **kwargs)
@@ -39,9 +39,9 @@ class VenvRunTest(unittest.TestCase):
                     ))
             )
 
-    def testGuessDedupe(self):
+    def testGuessDedupe(self) -> None:
 
-        def mock_run(*args, **kwargs):
+        def mock_run(*args, **kwargs) -> CompletedProcess[str]:
             if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                 return real_subprocess_run(
                     ('echo', 'venv'), **kwargs)
@@ -60,12 +60,12 @@ class VenvRunTest(unittest.TestCase):
                     ))
             )
 
-    def testGuessDedupeSymlink(self):
+    def testGuessDedupeSymlink(self) -> None:
         with tempfile.TemporaryDirectory(prefix="venv-run") as tempdir:
             symlink = os.path.join(tempdir, "venv")
             os.symlink(os.path.join(os.getcwd(), "venv"), symlink)
 
-            def mock_run(*args, **kwargs):
+            def mock_run(*args, **kwargs) -> CompletedProcess[str]:
                 if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                     return real_subprocess_run(
                         ('echo', symlink), **kwargs)
