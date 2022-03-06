@@ -1,6 +1,7 @@
 from argparse import ArgumentParser, REMAINDER
 from collections import OrderedDict
 from glob import glob
+from typing import List
 import os.path
 import platform
 import re
@@ -8,7 +9,7 @@ import subprocess
 import sys
 
 
-def guess():
+def guess() -> List[str]:
     if platform.system() != 'Windows':
         pypath = ('bin', 'python')
     else:
@@ -41,7 +42,7 @@ def guess():
     return list(venvs.keys())
 
 
-def run():
+def run() -> None:
     parser = ArgumentParser(
         usage='%(prog)s [OPTIONS] [--] [CMD]',
         description='''

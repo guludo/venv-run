@@ -1,7 +1,7 @@
 # Changelog
 
 ## Unreleased
-- Nothing yet.
+- Add basic type hints (@scop)
 
 ## 0.1.2 - 2022-03-06
 ### Fixed
