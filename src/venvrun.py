@@ -30,6 +30,20 @@ def guess() -> List[str]:
                 break
     except FileNotFoundError:
         pass
+    try:
+        with open('.tool-versions', 'r') as f:
+            for line in f:
+                tool_version = line.partition('#')[0].strip().split()
+                if len(tool_version) == 2 and tool_version[0] == "python":
+                    proc = subprocess.run(
+                        ('asdf', 'where', *tool_version),
+                        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+                    if proc.returncode == 0:  # may spew errors to stdout
+                        exes.append(
+                            os.path.join(proc.stdout.decode().strip(), *pypath))
+                    break
+    except FileNotFoundError:
+        pass
 
     venvs = OrderedDict(
         # Absolutize, normalize, and canonicalize for deduplication
