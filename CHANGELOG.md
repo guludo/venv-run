@@ -1,7 +1,9 @@
 # Changelog
 
 ## Unreleased
-- Add basic type hints (@scop)
+### Added
+- Support for [asdf `.tool-versions`](https://asdf-vm.com/manage/configuration.html#tool-versions) locals (@scop)
+- Basic type hints (@scop)
 
 ## 0.1.2 - 2022-03-06
 ### Fixed

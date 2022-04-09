@@ -27,6 +27,9 @@ class VenvRunTest(unittest.TestCase):
             if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                 return real_subprocess_run(
                     ('echo', 'pyenv/path/somewhere'), **kwargs)
+            if args[0] == ('asdf', 'where', 'python', '3.10.4'):
+                return real_subprocess_run(
+                    ('echo', 'asdf/path/somewhere'), **kwargs)
             return real_subprocess_run(*args, **kwargs)
 
         with patch.object(platform, "system", return_value='Linux'), \
@@ -38,7 +41,8 @@ class VenvRunTest(unittest.TestCase):
                 sorted(
                     os.path.normpath(os.path.join(os.getcwd(), x))
                     for x in (
-                            'venv', '.venv', os.curdir, 'pyenv/path/somewhere'
+                            'venv', '.venv', os.curdir, 'pyenv/path/somewhere',
+                            'asdf/path/somewhere'
                     ))
             )
 
