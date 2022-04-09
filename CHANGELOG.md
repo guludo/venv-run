@@ -3,6 +3,7 @@
 ## Unreleased
 ### Added
 - Support for [asdf `.tool-versions`](https://asdf-vm.com/manage/configuration.html#tool-versions) locals (@scop)
+- Support for [direnv python layout](https://github.com/direnv/direnv/blob/master/man/direnv-stdlib.1.md#layout-python-python_exe) (@scop)
 - Basic type hints (@scop)
 
 ## 0.1.2 - 2022-03-06

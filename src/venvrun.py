@@ -20,6 +20,8 @@ def guess() -> List[str]:
     exes.extend(glob(os.path.join('*', *pypath)))
     exes.extend(glob(os.path.join('.*', *pypath)))
     exes.append(os.path.join(os.path.curdir, *pypath))
+    exes.extend(glob(os.path.join('.direnv', 'python-*', *pypath)))
+    exes.extend(glob(os.path.join('.direnv', 'virtualenv', *pypath)))
     try:
         with open('.python-version', 'r') as f:
             for prefix in (x.strip() for x in f if not re.match(r'\s*#', x)):
