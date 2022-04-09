@@ -41,7 +41,10 @@ class VenvRunTest(unittest.TestCase):
                 sorted(
                     os.path.normpath(os.path.join(os.getcwd(), x))
                     for x in (
-                            'venv', '.venv', os.curdir, 'pyenv/path/somewhere',
+                            'venv', '.venv', os.curdir,
+                            '.direnv/python-3.10.4',
+                            '.direnv/virtualenv',
+                            'pyenv/path/somewhere',
                             'asdf/path/somewhere'
                     ))
             )
@@ -63,7 +66,9 @@ class VenvRunTest(unittest.TestCase):
                 sorted(
                     os.path.normpath(os.path.join(os.getcwd(), x))
                     for x in (
-                            'venv', '.venv', os.curdir
+                            'venv', '.venv', os.curdir,
+                            '.direnv/python-3.10.4',
+                            '.direnv/virtualenv',
                     ))
             )
 
@@ -87,6 +92,8 @@ class VenvRunTest(unittest.TestCase):
                     sorted(
                         os.path.normpath(os.path.join(os.getcwd(), x))
                         for x in (
-                                'venv', '.venv', os.curdir
+                                'venv', '.venv', os.curdir,
+                                '.direnv/python-3.10.4',
+                                '.direnv/virtualenv',
                         ))
                 )
