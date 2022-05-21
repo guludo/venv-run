@@ -234,7 +234,7 @@ local hook as applicable.
 .. _pytype: https://google.github.io/pytype/
 
 
-Author
-======
+Authors
+=======
 
-Gustavo José de Sousa
+- Gustavo José de Sousa (@guludo)
