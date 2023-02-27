@@ -238,3 +238,4 @@ Authors
 =======
 
 - Gustavo José de Sousa (@guludo)
+- Ville Skyttä (@scop)
