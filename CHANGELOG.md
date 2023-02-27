@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+- Nothing yet.
+
+## 0.2.0 - 2023-02-27
 ### Added
 - Support for [asdf `.tool-versions`](https://asdf-vm.com/manage/configuration.html#tool-versions) locals (@scop)
 - Support for [direnv python layout](https://github.com/direnv/direnv/blob/master/man/direnv-stdlib.1.md#layout-python-python_exe) (@scop)
