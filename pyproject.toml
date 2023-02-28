@@ -1,5 +1,6 @@
 [tool.ruff]
 target-version = "py37"
+select = ["E", "F", "I"]
 src = ["src", "tests"]
 
 [tool.mypy]
