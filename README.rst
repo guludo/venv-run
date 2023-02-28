@@ -233,6 +233,15 @@ local hook as applicable.
 .. _pylint: https://pylint.org
 .. _pytype: https://google.github.io/pytype/
 
+Testing
+=======
+
+To run tests with the current Python from ``$PATH``:
+
+.. code:: bash
+
+    $ python -X dev -bb -m unittest discover
+
 
 Authors
 =======
