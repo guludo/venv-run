@@ -242,6 +242,15 @@ To run tests with the current Python from ``$PATH``:
 
     $ python -X dev -bb -m unittest discover
 
+To test with multiple versions using Nox_:
+
+.. code:: bash
+
+    $ pip install nox  # unless already installed
+    $ nox
+
+.. _Nox: https://nox.thea.codes
+
 
 Authors
 =======
