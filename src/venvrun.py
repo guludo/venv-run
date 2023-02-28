@@ -1,11 +1,11 @@
-from argparse import ArgumentParser
-from glob import glob
-from typing import List
 import os.path
 import platform
 import re
 import subprocess
 import sys
+from argparse import ArgumentParser
+from glob import glob
+from typing import List
 
 
 def guess() -> List[str]:

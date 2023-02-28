@@ -4,7 +4,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from subprocess import CompletedProcess, run as real_subprocess_run
+from subprocess import CompletedProcess
+from subprocess import run as real_subprocess_run
 from typing import Any
 from unittest.mock import patch
 
