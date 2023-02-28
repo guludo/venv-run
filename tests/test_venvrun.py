@@ -9,7 +9,7 @@ from typing import Any
 from unittest.mock import patch
 
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, 'src'))
-import venvrun
+import venvrun  # noqa: E402 # must come after sys.path modification
 
 
 class VenvRunTest(unittest.TestCase):
