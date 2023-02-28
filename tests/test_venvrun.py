@@ -23,7 +23,7 @@ class VenvRunTest(unittest.TestCase):
 
     def testGuess(self) -> None:
 
-        def mock_run(*args: Any, **kwargs: Any) -> CompletedProcess[str]:
+        def mock_run(*args: Any, **kwargs: Any) -> CompletedProcess:
             if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                 return real_subprocess_run(
                     ('echo', 'pyenv/path/somewhere'), **kwargs)
@@ -51,7 +51,7 @@ class VenvRunTest(unittest.TestCase):
 
     def testGuessDedupe(self) -> None:
 
-        def mock_run(*args: Any, **kwargs: Any) -> CompletedProcess[str]:
+        def mock_run(*args: Any, **kwargs: Any) -> CompletedProcess:
             if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                 return real_subprocess_run(
                     ('echo', 'venv'), **kwargs)
@@ -77,7 +77,7 @@ class VenvRunTest(unittest.TestCase):
             symlink = os.path.join(tempdir, "venv")
             os.symlink(os.path.join(os.getcwd(), "venv"), symlink)
 
-            def mock_run(*args: Any, **kwargs: Any) -> CompletedProcess[str]:
+            def mock_run(*args: Any, **kwargs: Any) -> CompletedProcess:
                 if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
                     return real_subprocess_run(
                         ('echo', symlink), **kwargs)
