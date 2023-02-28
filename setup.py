@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 with open("README.rst", "r") as f:
     long_description = f.read()
@@ -31,5 +31,10 @@ setup(
         'console_scripts': [
             'venv-run = venvrun:run',
         ]
+    },
+    extras_require={
+        'dev': [
+            'ruff ~= 0.0.254',
+        ],
     },
 )
