@@ -127,7 +127,7 @@ And you can call a module installed in the environment with:
 
 .. code:: bash
 
-    $ venv -m path.to.module
+    $ venv-run -m path.to.module
 
 For both cases, it's also okay to explicitly call the interpreter (e.g.
 ``venv-run python -m path.to.module``).
