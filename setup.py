@@ -26,7 +26,7 @@ setup(
     ],
     package_dir={'': 'src'},
     py_modules=['venvrun'],
-    python_requires='~=3.5',
+    python_requires='~=3.7',
     entry_points={
         'console_scripts': [
             'venv-run = venvrun:run',
