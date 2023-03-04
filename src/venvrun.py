@@ -1,5 +1,4 @@
 from argparse import ArgumentParser, REMAINDER
-from collections import OrderedDict
 from glob import glob
 from typing import List
 import os.path
@@ -47,7 +46,7 @@ def guess() -> List[str]:
     except FileNotFoundError:
         pass
 
-    venvs = OrderedDict(
+    venvs = dict(
         # Absolutize, normalize, and canonicalize for deduplication
         (os.path.realpath(os.path.abspath(
             os.path.dirname(os.path.dirname(exe)))), True)
