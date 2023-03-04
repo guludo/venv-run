@@ -34,6 +34,8 @@ setup(
     },
     extras_require={
         'dev': [
+            'mypy ~= 1.0',
+            'types-setuptools',
             'ruff ~= 0.0.254',
         ],
     },
