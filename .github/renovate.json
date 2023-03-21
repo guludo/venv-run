@@ -33,7 +33,8 @@
     {
       "matchPackagePatterns": ["(^|/)ruff(-pre-commit)?$"],
       "groupName": "ruff",
-      "versioning": "pep440"
+      "versioning": "pep440",
+      "schedule": "42 4 * * 5/2"
     }
   ]
 }
