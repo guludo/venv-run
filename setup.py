@@ -36,6 +36,7 @@ setup(
         'dev': [
             'black ~= 23.1.0',
             'mypy ~= 1.0',
+            'nox',
             'types-setuptools',
             'ruff ~= 0.0.254',
         ],
