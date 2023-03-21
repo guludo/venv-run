@@ -1,0 +1,39 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":enablePreCommit",
+    ":preserveSemverRanges",
+    ":semanticPrefixChore"
+  ],
+  "ignorePresets": [
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers"
+  ],
+  "semanticCommits": "enabled",
+  "commitMessageTopic": "{{depName}}",
+  "regexManagers": [
+    {
+      "fileMatch": ["^(\\.pre-commit-config\\.yaml|setup\\.py)$"],
+      "matchStrings": ["(?<depName>[\\w-]+)(?<currentValue>==[a-z0-9.]+)"],
+      "datasourceTemplate": "pypi"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["pre-commit"],
+      "commitMessageTopic": "{{depName}}",
+      "semanticCommitScope": "pre-commit"
+    },
+    {
+      "matchPackagePatterns": ["(^|/)black$"],
+      "groupName": "black",
+      "versioning": "pep440"
+    },
+    {
+      "matchPackagePatterns": ["(^|/)ruff(-pre-commit)?$"],
+      "groupName": "ruff",
+      "versioning": "pep440"
+    }
+  ]
+}

@@ -34,11 +34,11 @@ setup(
     },
     extras_require={
         'dev': [
-            'black == 23.1.0',
-            'mypy == 1.1.1',
+            'black==23.1.0',
+            'mypy==1.1.1',
             'nox',
             'types-setuptools',
-            'ruff == 0.0.257',
+            'ruff==0.0.257',
         ],
     },
 )
