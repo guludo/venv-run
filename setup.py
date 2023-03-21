@@ -34,6 +34,7 @@ setup(
     },
     extras_require={
         'dev': [
+            'black ~= 23.1.0',
             'mypy ~= 1.0',
             'types-setuptools',
             'ruff ~= 0.0.254',
