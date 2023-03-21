@@ -9,33 +9,31 @@ from subprocess import run as real_subprocess_run
 from typing import Any
 from unittest.mock import patch
 
-sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, 'src'))
+sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "src"))
 import venvrun  # noqa: E402 # must come after sys.path modification
 
 
 class VenvRunTest(unittest.TestCase):
-
     def setUp(self) -> None:
         self.oldcwd = os.getcwd()
-        os.chdir(os.path.join(os.path.dirname(__file__), 'fixture'))
+        os.chdir(os.path.join(os.path.dirname(__file__), "fixture"))
 
     def tearDown(self) -> None:
         os.chdir(self.oldcwd)
 
     def testGuess(self) -> None:
-
-        def mock_run(*args: Any, **kwargs: Any) \
-            -> CompletedProcess:  # type: ignore[type-arg] # generic in 3.9+
-            if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
-                return real_subprocess_run(
-                    ('echo', 'pyenv/path/somewhere'), **kwargs)
-            if args[0] == ('asdf', 'where', 'python', '3.10.4'):
-                return real_subprocess_run(
-                    ('echo', 'asdf/path/somewhere'), **kwargs)
+        def mock_run(
+            *args: Any, **kwargs: Any
+        ) -> CompletedProcess:  # type: ignore[type-arg] # generic in 3.9+
+            if args[0] == ("pyenv", "prefix", "venv-run-testsuite"):
+                return real_subprocess_run(("echo", "pyenv/path/somewhere"), **kwargs)
+            if args[0] == ("asdf", "where", "python", "3.10.4"):
+                return real_subprocess_run(("echo", "asdf/path/somewhere"), **kwargs)
             return real_subprocess_run(*args, **kwargs)
 
-        with patch.object(platform, "system", return_value='Linux'), \
-             patch.object(subprocess, "run", mock_run):
+        with patch.object(platform, "system", return_value="Linux"), patch.object(
+            subprocess, "run", mock_run
+        ):
             venvs = venvrun.guess()
             self.assertTrue(venvs[0], "subscriptability")
             self.assertListEqual(
@@ -43,25 +41,28 @@ class VenvRunTest(unittest.TestCase):
                 sorted(
                     os.path.normpath(os.path.join(os.getcwd(), x))
                     for x in (
-                            'venv', '.venv', os.curdir,
-                            '.direnv/python-3.10.4',
-                            '.direnv/virtualenv',
-                            'pyenv/path/somewhere',
-                            'asdf/path/somewhere'
-                    ))
+                        "venv",
+                        ".venv",
+                        os.curdir,
+                        ".direnv/python-3.10.4",
+                        ".direnv/virtualenv",
+                        "pyenv/path/somewhere",
+                        "asdf/path/somewhere",
+                    )
+                ),
             )
 
     def testGuessDedupe(self) -> None:
-
-        def mock_run(*args: Any, **kwargs: Any) \
-            -> CompletedProcess:  # type: ignore[type-arg] # generic in 3.9+
-            if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
-                return real_subprocess_run(
-                    ('echo', 'venv'), **kwargs)
+        def mock_run(
+            *args: Any, **kwargs: Any
+        ) -> CompletedProcess:  # type: ignore[type-arg] # generic in 3.9+
+            if args[0] == ("pyenv", "prefix", "venv-run-testsuite"):
+                return real_subprocess_run(("echo", "venv"), **kwargs)
             return real_subprocess_run(*args, **kwargs)
 
-        with patch.object(platform, "system", return_value='Linux'), \
-             patch.object(subprocess, "run", mock_run):
+        with patch.object(platform, "system", return_value="Linux"), patch.object(
+            subprocess, "run", mock_run
+        ):
             venvs = venvrun.guess()
             self.assertTrue(venvs[0], "subscriptability")
             self.assertListEqual(
@@ -69,10 +70,13 @@ class VenvRunTest(unittest.TestCase):
                 sorted(
                     os.path.normpath(os.path.join(os.getcwd(), x))
                     for x in (
-                            'venv', '.venv', os.curdir,
-                            '.direnv/python-3.10.4',
-                            '.direnv/virtualenv',
-                    ))
+                        "venv",
+                        ".venv",
+                        os.curdir,
+                        ".direnv/python-3.10.4",
+                        ".direnv/virtualenv",
+                    )
+                ),
             )
 
     def testGuessDedupeSymlink(self) -> None:
@@ -80,15 +84,16 @@ class VenvRunTest(unittest.TestCase):
             symlink = os.path.join(tempdir, "venv")
             os.symlink(os.path.join(os.getcwd(), "venv"), symlink)
 
-            def mock_run(*args: Any, **kwargs: Any) \
-                -> CompletedProcess:  # type: ignore[type-arg] # generic in 3.9+
-                if args[0] == ('pyenv', 'prefix', 'venv-run-testsuite'):
-                    return real_subprocess_run(
-                        ('echo', symlink), **kwargs)
+            def mock_run(
+                *args: Any, **kwargs: Any
+            ) -> CompletedProcess:  # type: ignore[type-arg] # generic in 3.9+
+                if args[0] == ("pyenv", "prefix", "venv-run-testsuite"):
+                    return real_subprocess_run(("echo", symlink), **kwargs)
                 return real_subprocess_run(*args, **kwargs)
 
-            with patch.object(platform, "system", return_value='Linux'), \
-                 patch.object(subprocess, "run", mock_run):
+            with patch.object(platform, "system", return_value="Linux"), patch.object(
+                subprocess, "run", mock_run
+            ):
                 venvs = venvrun.guess()
                 self.assertTrue(venvs[0], "subscriptability")
                 self.assertListEqual(
@@ -96,8 +101,11 @@ class VenvRunTest(unittest.TestCase):
                     sorted(
                         os.path.normpath(os.path.join(os.getcwd(), x))
                         for x in (
-                                'venv', '.venv', os.curdir,
-                                '.direnv/python-3.10.4',
-                                '.direnv/virtualenv',
-                        ))
+                            "venv",
+                            ".venv",
+                            os.curdir,
+                            ".direnv/python-3.10.4",
+                            ".direnv/virtualenv",
+                        )
+                    ),
                 )
