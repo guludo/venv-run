@@ -70,7 +70,7 @@ def run() -> None:
             This behavior can be overridden with the --venv option.
 
             CMD contains the command line to execute. You can prepend
-            CMD with -- to avoid conflict with %(prog)s own options. If CMD is
+            CMD with -- to avoid conflict with %(prog)s's own options. If CMD is
             omitted then the environment's python interpreter is run without
             arguments.
 
