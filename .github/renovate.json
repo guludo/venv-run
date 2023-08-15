@@ -26,7 +26,7 @@
       "semanticCommitScope": "pre-commit"
     },
     {
-      "matchPackagePatterns": ["(^|/)black$"],
+      "matchPackagePatterns": ["(^|/)black(-pre-commit-mirror)?$"],
       "groupName": "black",
       "versioning": "pep440"
     },
