@@ -38,7 +38,7 @@ setup(
             "mypy==1.5.1",
             "nox",
             "types-setuptools",
-            "ruff==0.0.286",
+            "ruff==0.1.9",
         ],
     },
 )
