@@ -4,7 +4,7 @@ import nox
 
 
 @nox.session(
-    python=[f"{py}3.{x}" for py in ("", "pypy") for x in range(7, 13)] + ["pyston3"]
+    python=[f"{py}3.{x}" for py in ("", "pypy") for x in range(7, 14)] + ["pyston3"]
 )
 def test(session: nox.Session) -> None:
     """Run tests."""
