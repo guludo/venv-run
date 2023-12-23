@@ -26,11 +26,6 @@
       "semanticCommitScope": "pre-commit"
     },
     {
-      "matchPackagePatterns": ["(^|/)black(-pre-commit-mirror)?$"],
-      "groupName": "black",
-      "versioning": "pep440"
-    },
-    {
       "matchPackagePatterns": ["(^|/)ruff(-pre-commit)?$"],
       "groupName": "ruff",
       "versioning": "pep440",

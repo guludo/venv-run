@@ -2,8 +2,22 @@
 target-version = "py37"
 select = ["E", "F", "I"]
 ignore = [
-  "E50", # black
-  "E70", # black
+  # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+  "W191",
+  "E111",
+  "E114",
+  "E117",
+  "D206",
+  "D300",
+  "Q000",
+  "Q001",
+  "Q002",
+  "Q003",
+  "COM812",
+  "COM819",
+  "ISC001",
+  "ISC002",
+  "E501",
 ]
 src = ["src", "tests"]
 
