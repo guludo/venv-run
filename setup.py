@@ -34,7 +34,6 @@ setup(
     },
     extras_require={
         "dev": [
-            "black==23.7.0",
             "mypy==1.5.1",
             "nox",
             "types-setuptools",
