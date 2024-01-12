@@ -10,7 +10,7 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           set -euxo pipefail
@@ -33,7 +33,7 @@ jobs:
           - "3.13.0-alpha - 3.13"
           - "pypy-3.10"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: excitedleigh/setup-nox@v2.1.0
       - uses: actions/setup-python@v5
         with:
