@@ -1,6 +1,8 @@
-import os.path
+import errno
+import os
 import platform
 import re
+import stat
 import subprocess
 import sys
 from argparse import ArgumentParser
@@ -122,6 +124,9 @@ def run() -> None:
             exit(1)
 
         args.venv = venvs[0]
+    # Avoid invoking whatever is in PATH if given nonexistent/non-dir venv
+    if not stat.S_ISDIR(os.stat(args.venv).st_mode):
+        raise NotADirectoryError(errno.ENOTDIR, "Not a directory", args.venv)
     path = ""
     if platform.system() != "Windows":
         path = os.path.join(args.venv, "bin")
