@@ -34,7 +34,7 @@ setup(
     },
     extras_require={
         "dev": [
-            "mypy==1.8.0",
+            "mypy==1.13.0",
             "nox",
             "types-setuptools",
             "ruff==0.1.12",
