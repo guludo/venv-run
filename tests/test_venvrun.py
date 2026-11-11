@@ -103,3 +103,15 @@ class VenvRunTest(unittest.TestCase):
                         )
                     ),
                 )
+
+    def testRunBareDoubleDashDefaultsToPython(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="venv-run") as tempdir:
+            argv = ["venv-run", "--venv", tempdir, "--"]
+            with patch.object(sys, "argv", argv):
+                with patch.dict(os.environ, {"PATH": os.environ.get("PATH", "")}):
+                    with patch.object(
+                        os, "execvp", side_effect=RuntimeError("must not exec")
+                    ) as mock_exec:
+                        with self.assertRaises(RuntimeError):
+                            venvrun.run()
+            self.assertEqual(mock_exec.call_args[0][0], "python")

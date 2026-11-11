@@ -102,11 +102,11 @@ def run() -> None:
 
     args, cmd_args = parser.parse_known_args()
 
-    if not cmd_args:
-        cmd_args = ["python"]
-
     if cmd_args and cmd_args[0] == "--":
         cmd_args.pop(0)
+
+    if not cmd_args:
+        cmd_args = ["python"]
     if not args.venv:
         venvs = guess()
 
